@@ -11,7 +11,7 @@ class User:
         '''
         __init__ method that helps us define properties for our objects.
         Args:
-            irst_name: New user first name.
+            first_name: New user first name.
             last_name : New user last name.
             user_name: New user username.
             password : New user password.
