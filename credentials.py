@@ -45,18 +45,18 @@ def find_account_credentials(accountname):
 
 def main():
 
-    print("Hello there!Welcome to Password Locker.What is your name?")
+    print("Welcome to Password Locker. What is your name?")
     name = input()
     print(f"Hello {name}!To start off please choose one of the options below:")
     print('\n')
 
     while True:
-        print("Use these short-codes for: na - SignUp  or  lg - Login")
+        print("this short code helps to signup: na - SignUp")
         user_choice = input().lower()
 
         if user_choice == "na":
             print("Create an account")
-            print("-"*10)
+            print("-"*7)
             print("Enter First Name:")
 
             firstname = input()
