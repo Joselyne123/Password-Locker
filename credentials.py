@@ -99,10 +99,10 @@ def main():
                     print("Enter Account Username:")
                     accountusername = input()
 
-                    print("Enter Account Password:") #option to generate own password should be here with an if statement
+                    print("Enter Account Password:") 
                     accountpassword = input()
 
-                    save_account(create_account(accountname,accountusername,accountpassword)) #create and save new accountname
+                    save_account(create_account(accountname,accountusername,accountpassword)) 
                     print(f"Account Name:{accountname}, Account Username:{accountusername}, Account Password:{accountpassword}")
 
 
