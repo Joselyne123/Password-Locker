@@ -4,7 +4,7 @@ class User:
     """
 
 
-    ser_list = []
+    user_list = []
 
     def __init__(self,first_name, last_name, user_name, password):
 
@@ -33,7 +33,7 @@ class User:
         delete_user method deletes user objects from the user_list
         '''
 
-        User.user_list.remove(self)
+        ser.user_list.remove(self)
 
 
     @classmethod
