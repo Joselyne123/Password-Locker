@@ -33,7 +33,7 @@ class User:
         delete_user method deletes user objects from the user_list
         '''
 
-        ser.user_list.remove(self)
+        User.user_list.remove(self)
 
 
     @classmethod
