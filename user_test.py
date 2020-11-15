@@ -105,7 +105,7 @@ class TestAccount(unittest.TestCase):
 
     def test_init(self):
         self.assertEqual(self.new_account.account_name,"Instagram")
-        self.assertEqual(self.new_account.account_userName,"oselyne")
+        self.assertEqual(self.new_account.account_userName,"Joselyne")
         self.assertEqual(self.new_account.account_password,"dudu")
 
     def test_save_account(self):
