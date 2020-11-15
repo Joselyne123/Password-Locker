@@ -83,7 +83,7 @@ class Account:
         return cls.account_list
 
     def delete_account(self):
-        Account.account_list.remov(self)
+        Account.account_list.remove(self)
 
     @classmethod
     def find_by_accountName(cls,accountname):
