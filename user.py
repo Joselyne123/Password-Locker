@@ -1,92 +1,93 @@
+import random
+global user_list
 class User:
     """
-    Class that generates new user instances
+    class that generates a new instance of a user
     """
-
-
-    user_list = []
-
-    def __init__(self,first_name, last_name, user_name, password):
-
-        '''
-        __init__ method that helps us define properties for our objects.
-        Args:
-            first_name: New user first name.
-            last_name : New user last name.
-            user_name: New user username.
-            password : New user password.
-        '''
-        self.first_name = first_name
-        self.last_name = last_name
-        self.user_name = user_name
-        self.password = password
-
+    user_list=[]
     def save_user(self):
         '''
-        save_user method saves user objects into user_list
+        save user method saves user objects into user list
         '''
-
         User.user_list.append(self)
-
-    def delete_user(self):
+    def delete_user(self): 
         '''
-        delete_user method deletes user objects from the user_list
+        delete_user method delete a saved used from user
         '''
-
         User.user_list.remove(self)
-
-
     @classmethod
-    def find_by_username(cls,username):
+    def display_users(cls): 
         '''
-        Method that takes in a username and returns a user that matches that username.
-        Args:
-            username: Username to search for
-        Returns :
-            User details of person that matches the user.
+        method that display all user saved in the list
         '''
-
-        for user in cls.user_list:
-            if user.user_name == username:
-                return user
-
-
-    @classmethod
-    def find_by_userpassword(cls,userpassword):
-        for password in cls.user_list:
-            if password.password == userpassword:
-                return password
-
-
-    @classmethod
-    def display_userInfo(cls):
         return cls.user_list
-
-
-
-
-class Account:
-
-    account_list = []
-
-    def __init__(self, account_name, account_userName, account_password):
-
-        self.account_name = account_name
-        self.account_userName = account_userName
-        self.account_password = account_password
-
-    def save_account(self):
-        Account.account_list.append(self)
-
     @classmethod
-    def display_accounts(cls):
-        return cls.account_list
-
-    def delete_account(self):
-        Account.account_list.remove(self)
-
+    def user_exist(cls,first_name): 
+        '''
+        method that find by username and return all information that matches
+        '''
+        for user in cls.user_list:
+            if user.first_name== first_name:
+                return True
+        return False
     @classmethod
-    def find_by_accountName(cls,accountname):
-        for account in cls.account_list:
-            if account.account_name == accountname:
-                return account
+    def find_by_name(cls,first_name):
+        '''
+        method that find credentials by username and return all information that matches
+        '''
+        for user in cls.user_list:
+            if user.first_name==first_name:
+                return user
+    def __init__(self,first_name,username,password,email): 
+        self.first_name=first_name
+        self.username=username
+        self.password=password
+        self.email=email
+class Credential:
+    '''
+    class of credential account, generate passwords information
+    '''
+    credential_list=[]
+    user_credential_list=[]
+    def __init__(self,first_name,platform_name,account_name,password):
+        '''
+        Methode show the properties of user object
+        '''
+        self.first_name=first_name
+        self.platform_name=platform_name
+        self.account_name=account_name
+        self.password=password
+    def save_credential(self):
+        '''
+        methode to save credential globally
+        '''
+        Credential.credential_list.append(self)
+    
+    @classmethod
+    def check_user(cls,first_name,password):
+        '''
+        Method that checks if name and password entered match
+        '''
+        current_user=''
+        for user in User.user_list:
+            if(user.first_name== first_name and user.password==password):
+                current_user=user.first_name
+        return current_user
+    @classmethod
+    def disp_credential(cls,first_name): 
+        '''
+        method to display all list of saved credentials
+        '''
+        user_credential_list=[]
+        for credential in cls.credential_list:
+            if credential.first_name==first_name:
+                user_credential_list.append(credential)
+        return user_credential_list
+    @classmethod
+    def find_site(cls,platform_name):
+        '''
+        Methode that find by site name and return credentials that match
+        '''
+        for credential in cls.credential_list:
+            if credential.platform_name==platform_name:
+                return credential

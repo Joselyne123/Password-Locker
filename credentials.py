@@ -1,157 +1,189 @@
 #!/usr/bin/env python3.6
 from user import User
-from user import Account
-
-def create_user(firstname,lastname,username,password):
-    new_user = User(firstname,lastname,username,password)
+from user import Credential
+def create_user(fname,name,pword,email):
+    '''
+    Function to create a new user account
+    '''
+    new_user = User(fname,name,pword,email)
     return new_user
-
 def save_user(user):
-    user.save_user()
-
+    '''
+    to save a new user account
+    '''
+    User.save_user(user)
 def delete_user(user):
+    '''
+    function to delete a user
+    '''
     user.delete_user()
-
-def find_user(username):
-    return User.find_by_username(username)
-
-def find_password(userpassword):
-    return User.find_by_userpassword(userpassword)
-
-def display_user():
-    return User.display_userInfo()
-
-
-
-def create_account(accountname,accountusername,accountpassword):
-    new_account = Account(accountname,accountusername,accountpassword)
-    return new_account
-
-def save_account(user):
-    user.save_account()
-
-def delete_account(user):
-    user.delete_account()
-
-def display_account_credentials():
-    return Account.display_accounts()
-
-def find_account_credentials(accountname):
-    return Account.find_by_accountName(accountname)
-
-
-
-
-
+def display_users():
+    '''
+    function to display all users
+    '''
+    return User.display_users()
+def find_user(first_name):
+    '''
+    function that find user by the firstname
+    '''
+    return User.find_by_name(first_name)
+def check_user(first_name,password):
+    '''
+    check if the account exist
+    '''
+    checking_user=Credential.check_user(first_name,password)
+    return checking_user
+def create_cred(first_name,platform_name,account_name,password):
+    '''
+    new credential account
+    '''
+    new_credential=Credential(first_name,platform_name,account_name,password)
+    return new_credential
+def save_credential(credential):
+    '''
+    to save all credentials
+    '''
+    Credential.save_credential(credential)
+def delete_credential(credential):
+    '''
+    to save all credentials
+    '''
+    Credential.delete_credential(credential)
+def disp_credential(first_name):
+    '''
+    to display all credentials stored
+    '''
+    return Credential.disp_credential(first_name)
+# def generate_password():
+#     '''
+#     function to give password randomly
+#     '''
+#     generate=Credential.generate_password()
+#     return generate
+def check_existing_user(first_name):
+        '''
+        to check if the user exist
+        '''
+        return User.user_exist(first_name)
 def main():
-
-    print("Welcome to Password Locker. What is your name?")
-    name = input()
-    print(f"Hello {name}!To start off please choose one of the options below:")
-    print('\n')
-
+    print(' ')
+    print('welcome to password Locker! Let us start!')
     while True:
-        print("this short code helps to signup: na - SignUp")
-        user_choice = input().lower()
-
-        if user_choice == "na":
-            print("Create an account")
-            print("-"*7)
-            print("Enter First Name:")
-
-            firstname = input()
-
-            print("Enter Last Name:")
-            lastname = input()
-
-            print("Enter Username:")
-            username = input()
-
-            print("Enter password")
-            password = input()
-
-            save_user(create_user(firstname,lastname,username,password)) 
-            print('\n')
-            print(f"New user {firstname} {lastname} has been created.You can now proceed to login with your credentials.")
-            print('\n')
-
-
-        elif user_choice == "lg":
-            print("Enter your Username:")
-            login_userName = input()
-
-            print("Enter your password:")
-            login_password = input()
-
-            if find_user(login_userName) and find_password(login_password):
-                print('\n')
-                print("Welcome!To continue please choose any of the options below:")
-                print("-"*60)
-
-                print("nw - Add New Account, da - Display Accounts, vw -View Account Details, dlt - Delete Account Detaiils")
-
-                account_choice = input().lower()
-
-                if account_choice == "nw":
-                    print("Enter Account Name:")
-                    accountname = input()
-
-                    print("Enter Account Username:")
-                    accountusername = input()
-
-                    print("Enter Account Password:") 
-                    accountpassword = input()
-
-                    save_account(create_account(accountname,accountusername,accountpassword)) 
-                    print(f"Account Name:{accountname}, Account Username:{accountusername}, Account Password:{accountpassword}")
-
-
-                elif account_choice == "da":
-                    if display_account_credentials():
-                        print("Here is a list of all your accounts: ")
-                        print('\n')
-
-                        for account in display_account_credentials():
-                            print(f"Account Name:{account.account_name}")
-
-                    else:
-                        print("invalid choice")
-
-
-                elif account_choice == "vw":
-                    print("Enter an Account Name:")
-                    account_choiceName = input()
-
-                    if display_account_credentials():
-                        account_choiceName = find_account_credentials(account_choiceName)
-                        print(f"Account Username:{account_choiceName.account_userName}   Password:{account_choiceName.account_password}")
-
-                    else:
-                        print(f"{account_choiceName} does not exist")
-
-
-
-                elif account_choice == "dlt":
-                    print("Enter Account Name:")
-                    delete_acc = input()
-
-                    if delete_account(delete_acc):
-                        return delete_account(delete_acc)
-
-                    else:
-                        print(f"{delete_acc} does not exist")
-
-
+        print(' ')
+        print("-"*30)
+        print("use these abbreviations to navigate: \n ca - Create account \n li - Login \n du - Delete User \n jojo - Dispaly all users \n ex - Exit")
+        short_code = input('Please Enter your option:').lower().strip()
+        if short_code == 'ex':
+            break
+        elif short_code=='du':
+            print("-"*30)
+            print(' ')
+            print("Delete a user:")
+            search_email=input('Please Enter the first_name')
+            if check_existing_user(search_email):
+                search_user=find_user(search_email)
+                print(f"{search_user.first_name} {search_user.username}")
+                print("*"*20)
+                print(f"Email:{search_user.email}")
+                print(f"FirstName:{search_user.first_name}")
+                search_user.delete_user()
+                print("User deleted.")
             else:
-                print("Incorrect username or password.Please try again.")
+                print("The user doesn't Exit")
+        elif short_code=='jojo' :
+            print('-'*30)
+            if display_users():
+                print("List of all your Users")
                 print('\n')
-
-
+                for user in display_users():
+                    print(f"{user.first_name} {user.username} {user.password} {user.email}")
+                    print('\n')
+            else:
+                print('-'*30)
+                print("You dont have any saved user yet ")
+        elif short_code == 'jojo':
+            print("-"*30)
+            print(' ')
+            print("Create a new account:")
+            first_name=input('Enter First_name: ').strip()
+            username=input('Enter the Username: ').strip()
+            password=input('Enter the Password: ').strip()
+            email=input('Enter your Email: ').strip()
+            save_user(create_user(first_name,username,password,email))
+            print(" ")
+            print(f'{first_name} {username} {email} {password} created successfully ')
+        elif short_code == 'nana':
+            print("-"*30)
+            print(' ')
+            print("Login:")
+            first_name =input('Enter your Firstname: ').strip()
+            password=str(input('Enter the Password: '))
+            user_exists=check_user(first_name, password)
+            if user_exists == first_name:
+                print(" ")
+                print(f'Welcome {first_name}.Choose what to do.')
+                print('')
+                while True:
+                    print("-"*30)
+                    print('Navigation code: \n cc-Create a Credential \n dc-Display Credentials \n du - Delete Credential \n ex-Exit')
+                    short_code=input('Please Enter your option: ').lower().strip()
+                    print("-"*30)
+                    if short_code == 'ex':
+                        print(" ")
+                        print(f'Bye {first_name} Thank you fo using password locker ')
+                        break
+                    elif short_code=='du':
+                        print("-"*30)
+                        print(' ')
+                        print("Delete a Credential...")
+                        print("Credential successfully deleted.")
+                        break
+                    elif short_code =='kk':
+                        print(' ')
+                        print('Enter your credential: ')
+                        platform_name=input('enter the platform\'s name-').strip()
+                        account_name=input('Enter your account\'s name- ').strip()
+                        while True:
+                            print(' ')
+                            print("-"*30)
+                            print('Please choose any option:\n ep-enter existing password \n ex-exit')
+                            passwor=input('Enter your option: ').lower().strip()
+                            print("-"*30)
+                            if passwor== 'ps':
+                                print(" ")
+                                password =input('Enter your password: ').strip()
+                                break
+                            # elif passwor == 'ng':
+                            #     password = generate_password()
+                            #     print(f'Credential Created. Platform Name: {site_name} -Account Name: {account_name} - Password: {password}')
+                            elif passwor== 'ex':
+                                break
+                            else:
+                                print('Wrong option. Try again ')
+                        save_credential(create_cred(first_name,platform_name,account_name,password))
+                        print(' ')
+                        print(f'Credential Created. Platform Name: {platform_name} -Account Name: {account_name} - Password: {password}')
+                        print('')
+                    elif short_code == 'dc':
+                        print(' ')
+                        if disp_credential(first_name):
+                            print('List of Credentials:')
+                            print(' ')
+                            for credential in disp_credential(first_name):
+                                print(f'Credential Created. Platform Name: {platform_name} -Account Name: {account_name} - Password: {password}')
+                            print(' ')
+                        else:
+                                print(' ')
+                                print(" You don't have any credential ")
+                                print('')
+                    else:
+                        print('Wrong option. Try again.')
+            else:
+                print(' ')
+                print("Account does not exist.Create an account first")
         else:
-            print("Incorrect Option.Please choose from the ones listed")
-            print('\n')
-
-
-
+            print('-'*30)
+            print(' ')
+            print(' Wrong option try Again.')
 if __name__ == '__main__':
     main()
