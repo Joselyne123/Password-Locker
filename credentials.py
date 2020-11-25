@@ -101,7 +101,7 @@ def main():
             else:
                 print('-'*30)
                 print("You dont have any saved user yet ")
-        elif short_code == 'jojo':
+        elif short_code == 'ca':
             print("-"*30)
             print(' ')
             print("Create a new account:")
@@ -112,7 +112,7 @@ def main():
             save_user(create_user(first_name,username,password,email))
             print(" ")
             print(f'{first_name} {username} {email} {password} created successfully ')
-        elif short_code == 'nana':
+        elif short_code == 'li':
             print("-"*30)
             print(' ')
             print("Login:")
@@ -138,7 +138,7 @@ def main():
                         print("Delete a Credential...")
                         print("Credential successfully deleted.")
                         break
-                    elif short_code =='kk':
+                    elif short_code =='cc':
                         print(' ')
                         print('Enter your credential: ')
                         platform_name=input('enter the platform\'s name-').strip()
@@ -149,7 +149,7 @@ def main():
                             print('Please choose any option:\n ep-enter existing password \n ex-exit')
                             passwor=input('Enter your option: ').lower().strip()
                             print("-"*30)
-                            if passwor== 'ps':
+                            if passwor== 'ep':
                                 print(" ")
                                 password =input('Enter your password: ').strip()
                                 break
